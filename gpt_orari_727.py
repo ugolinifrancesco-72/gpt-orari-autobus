@@ -1,11 +1,9 @@
 import streamlit as st
-import pandas as pd
 from datetime import datetime
 
 st.set_page_config(page_title="Orari Autobus 727")
 st.title("Orari Autobus - Linea 727")
 
-# Fermate vere estratte dai file Excel
 fermate_andata = [
     "GENOVA BRIGNOLE", "S.P.D'ARENA AUT.", "BUSALLA AUT.", "BUSALLA F.S.", "ISORELLE",
     "PONTE SAVIGNONE", "SAVIGNONE", "S. BARTOLOMEO", "CASELLA", "AVOSSO",
@@ -14,32 +12,33 @@ fermate_andata = [
 
 fermate_ritorno = list(reversed(fermate_andata))
 
-# Orari reali estratti dai file Excel
+# Orari con fermate coperte (esempio dimostrativo)
 orari = {
     "feriale": {
         "andata": [
-            "06:20", "07:00", "07:25", "08:10", "08:45", "09:20", "09:40", "11:20",
-            "12:10", "13:10", "13:55", "15:20", "15:55", "17:30", "18:45"
+            {"ora": "06:20", "fermate": ["GENOVA BRIGNOLE", "BUSALLA F.S.", "CASELLA", "BROMIA"]},
+            {"ora": "07:25", "fermate": ["GENOVA BRIGNOLE", "AVOSSO", "MONTOGGIO", "BROMIA"]},
+            {"ora": "09:40", "fermate": ["GENOVA BRIGNOLE", "SAVIGNONE", "CASELLA", "AVOSSO", "BROMIA"]}
         ],
         "ritorno": [
-            "06:30", "07:10", "08:00", "08:40", "10:00", "10:50", "12:00",
-            "13:10", "14:30", "15:40", "16:30", "17:50", "18:00", "19:15"
+            {"ora": "06:30", "fermate": ["BROMIA", "MONTOGGIO", "AVOSSO", "CASELLA", "GENOVA BRIGNOLE"]},
+            {"ora": "08:00", "fermate": ["BROMIA", "SAVIGNONE", "BUSALLA F.S.", "GENOVA BRIGNOLE"]}
         ]
     },
     "festivo": {
         "andata": [
-            "08:00", "09:15", "10:30", "11:45", "13:00", "14:15", "15:30", "16:45", "18:00"
+            {"ora": "08:00", "fermate": ["GENOVA BRIGNOLE", "BUSALLA F.S.", "CASELLA", "BROMIA"]},
+            {"ora": "10:30", "fermate": ["GENOVA BRIGNOLE", "CASELLA", "MONTOGGIO", "BROMIA"]}
         ],
         "ritorno": [
-            "07:00", "08:15", "09:30", "10:45", "12:00", "13:15", "14:30", "15:45", "17:00"
+            {"ora": "07:00", "fermate": ["BROMIA", "AVOSSO", "CASELLA", "GENOVA BRIGNOLE"]},
+            {"ora": "09:30", "fermate": ["BROMIA", "SAVIGNONE", "BUSALLA F.S.", "GENOVA BRIGNOLE"]}
         ]
     }
 }
 
-# UI
 st.markdown("### Seleziona il viaggio")
 direzione = st.radio("Direzione", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"])
-
 direzione_key = "andata" if "Andata" in direzione else "ritorno"
 fermate = fermate_andata if direzione_key == "andata" else fermate_ritorno
 
@@ -47,27 +46,32 @@ partenza = st.selectbox("Fermata di partenza", fermate)
 idx_partenza = fermate.index(partenza)
 fermate_possibili = fermate[idx_partenza + 1:]
 
-if fermate_possibili:
-    destinazione = st.selectbox("Fermata di arrivo", fermate_possibili)
-else:
+destinazione = st.selectbox("Fermata di arrivo", fermate_possibili) if fermate_possibili else None
+if not destinazione:
     st.warning("Non ci sono fermate successive disponibili.")
-    destinazione = None
 
 st.markdown("### Seleziona il giorno e l'orario")
 giorno = st.selectbox("Giorno della settimana", ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"])
-
 ora_corrente = datetime.now().strftime("%H:%M")
 ora_input = st.text_input("Orario di riferimento (HH:MM) - opzionale", "")
 ora_riferimento = ora_input if ora_input else ora_corrente
 
-def filtra_orari(lista_orari, ora):
-    return [x for x in lista_orari if x >= ora]
+def filtra_orari_completi(corse, partenza, destinazione, ora):
+    risultati = []
+    for corsa in corse:
+        if partenza in corsa["fermate"] and destinazione in corsa["fermate"]:
+            if corsa["fermate"].index(partenza) < corsa["fermate"].index(destinazione):
+                if corsa["ora"] >= ora:
+                    risultati.append(corsa["ora"])
+    return risultati
 
 if st.button("Cerca Orari") and destinazione:
     tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
-    orari_disponibili = filtra_orari(orari[tipo][direzione_key], ora_riferimento)
+    corse = orari[tipo][direzione_key]
+    orari_filtrati = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
 
-    if orari_disponibili:
-        st.success(f"Prossimi orari da {partenza} a {destinazione}: {', '.join(orari_disponibili)}")
+    if orari_filtrati:
+        st.success(f"Prossimi orari da {partenza} a {destinazione}: {', '.join(orari_filtrati)}")
     else:
         st.error("Nessuna corsa disponibile a partire dall'orario selezionato.")
+
