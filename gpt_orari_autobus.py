@@ -1,13 +1,11 @@
-
+import streamlit as st
 import json
-from datetime import datetime
 
 # Caricamento del file JSON degli orari
 with open('orari_autobus.json', 'r', encoding='utf-8') as f:
     orari_data = json.load(f)
 
 def trova_orari(partenza, destinazione, giorno_settimana, ora_richiesta=None):
-    # Capire se giorno feriale o festivo
     giorno_settimana = giorno_settimana.lower()
     if giorno_settimana in ["sabato", "domenica"]:
         tipo_giorno = "festivo"
@@ -20,7 +18,6 @@ def trova_orari(partenza, destinazione, giorno_settimana, ora_richiesta=None):
         for tratta, orari in tratte.items():
             if partenza.lower() in tratta.lower() and destinazione.lower() in tratta.lower():
                 if ora_richiesta:
-                    # Cerca la corsa successiva all'ora richiesta
                     prossime_corse = [o for o in orari if o >= ora_richiesta]
                     if prossime_corse:
                         risultati.append((linea, prossime_corse[0]))
@@ -38,15 +35,21 @@ def trova_orari(partenza, destinazione, giorno_settimana, ora_richiesta=None):
     else:
         return "Nessuna corsa trovata per la tratta richiesta."
 
-# Esempi di utilizzo
-if __name__ == "__main__":
-    print("Benvenuto nel Mini-GPT degli orari Autobus!")
-    partenza = input("Da dove parti? ")
-    destinazione = input("Dove vuoi andare? ")
-    giorno = input("Che giorno della settimana? (es: lunedì, domenica) ")
-    ora = input("A che ora (formato HH:MM, opzionale)? Lascia vuoto se non ti interessa: ")
+# Streamlit App
+st.title("🚍 Orari Autobus - Mini GPT")
 
+partenza = st.text_input("Da dove parti?", "Genova Brignole")
+destinazione = st.text_input("Dove vuoi andare?", "Bromia")
+
+giorno = st.selectbox(
+    "Che giorno della settimana?",
+    ("lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato", "domenica")
+)
+
+ora = st.text_input("A che ora? (Formato HH:MM, opzionale)", "")
+
+if st.button("Cerca Orari"):
     ora = ora if ora else None
     risposta = trova_orari(partenza, destinazione, giorno, ora)
-    print("\nRisultato:")
-    print(risposta)
+    st.subheader("Risultato:")
+    st.text(risposta)
