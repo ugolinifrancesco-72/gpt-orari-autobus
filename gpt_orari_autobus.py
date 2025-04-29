@@ -1,75 +1,78 @@
 import streamlit as st
+from datetime import datetime
 
 st.set_page_config(page_title="Orari Autobus GPT")
 
-st.title("Orari Autobus - Mini GPT")
+st.title("Orari Autobus - Linea 727 (Andata e Ritorno)")
 
-# Dati degli orari incorporati direttamente nel codice
-orari_data = {
-    "feriale": {
-        "727": {
-            "Genova Brignole -> Bromia": ["7:25", "8:10", "8:40", "10:20"]
-        },
-        "740": {
-            "Busalla FS -> Bromia": ["5:30", "6:15", "7:00", "7:30"]
-        },
-        "822": {
-            "Busalla FS -> Savignone": ["6:10", "7:10", "8:30", "9:30"]
-        }
-    },
-    "festivo": {
-        "727": {
-            "Genova Brignole -> Bromia": ["7:35", "10:30", "13:30", "16:30"]
-        },
-        "822": {
-            "Busalla FS -> Savignone": ["7:15", "8:30", "10:30", "13:40"]
-        }
-    }
+# Fermate della linea 727
+fermate_andata = [
+    "Genova Brignole",
+    "Genova Via Adua",
+    "Genova Sampierdarena",
+    "Busalla FS",
+    "Casella Paese",
+    "Avosso",
+    "Montoggio",
+    "Bromia"
+]
+
+fermate_ritorno = list(reversed(fermate_andata))
+
+# Orari feriali e festivi (esempio base)
+orari_feriali = {
+    "andata": ["07:25", "08:10", "09:40", "11:20", "13:10", "15:20", "17:30"],
+    "ritorno": ["06:30", "08:00", "10:00", "12:00", "14:30", "16:30", "18:00"]
 }
 
-def trova_orari(partenza, destinazione, giorno_settimana, ora_richiesta=None):
-    giorno_settimana = giorno_settimana.lower()
-    if giorno_settimana in ["sabato", "domenica"]:
-        tipo_giorno = "festivo"
-    else:
-        tipo_giorno = "feriale"
+orari_festivi = {
+    "andata": ["08:00", "10:30", "13:00", "15:30", "18:00"],
+    "ritorno": ["07:00", "09:30", "12:00", "14:30", "17:00"]
+}
 
-    risultati = []
+# Scelta direzione
+direzione = st.radio("Scegli la direzione", ("Andata", "Ritorno"))
 
-    for linea, tratte in orari_data.get(tipo_giorno, {}).items():
-        for tratta, orari in tratte.items():
-            if partenza.lower() in tratta.lower() and destinazione.lower() in tratta.lower():
-                if ora_richiesta:
-                    prossime_corse = [o for o in orari if o >= ora_richiesta]
-                    if prossime_corse:
-                        risultati.append((linea, prossime_corse[0]))
-                else:
-                    risultati.append((linea, orari))
+if direzione == "Andata":
+    fermate = fermate_andata
+else:
+    fermate = fermate_ritorno
 
-    if risultati:
-        risposte = []
-        for linea, orari in risultati:
-            if isinstance(orari, list):
-                risposte.append(f"Linea {linea}: Orari disponibili -> {', '.join(orari)}")
-            else:
-                risposte.append(f"Linea {linea}: Prossima corsa alle {orari}")
-        return "\n".join(risposte)
-    else:
-        return "Nessuna corsa trovata per la tratta richiesta."
+# Scelta fermate
+partenza = st.selectbox("Seleziona la fermata di partenza", fermate)
+indice_partenza = fermate.index(partenza)
+fermate_possibili = fermate[indice_partenza+1:]
 
-# UI dell'app
-partenza = st.text_input("Da dove parti?", "Genova Brignole")
-destinazione = st.text_input("Dove vuoi andare?", "Bromia")
+destinazione = st.selectbox("Seleziona la fermata di arrivo", fermate_possibili)
 
+# Scelta giorno
 giorno = st.selectbox(
-    "Che giorno della settimana?",
-    ("lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato", "domenica")
+    "Seleziona il giorno",
+    ("Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica")
 )
 
-ora = st.text_input("A che ora? (Formato HH:MM, opzionale)", "")
+# Orario richiesto
+ora_attuale = datetime.now().strftime("%H:%M")
+ora_richiesta = st.text_input("Inserisci un orario di riferimento (HH:MM) oppure lascia vuoto per l'orario attuale:", "")
+
+if ora_richiesta == "":
+    ora_richiesta = ora_attuale
+
+# Funzione per trovare gli orari successivi
+def trova_prossimi_orari(lista_orari, ora_rif):
+    return [o for o in lista_orari if o >= ora_rif]
 
 if st.button("Cerca Orari"):
-    ora = ora if ora else None
-    risposta = trova_orari(partenza, destinazione, giorno, ora)
-    st.subheader("Risultato:")
-    st.text(risposta)
+    tipo_giorno = "feriali" if giorno.lower() in ["lunedì", "martedì", "mercoledì", "giovedì", "venerdì"] else "festivi"
+    
+    if tipo_giorno == "feriali":
+        orari = orari_feriali["andata"] if direzione == "Andata" else orari_feriali["ritorno"]
+    else:
+        orari = orari_festivi["andata"] if direzione == "Andata" else orari_festivi["ritorno"]
+    
+    risultati = trova_prossimi_orari(orari, ora_richiesta)
+    
+    if risultati:
+        st.success(f"Prossimi orari da {partenza} a {destinazione}: {', '.join(risultati)}")
+    else:
+        st.warning("Nessuna corsa disponibile a partire dall'orario selezionato.")
