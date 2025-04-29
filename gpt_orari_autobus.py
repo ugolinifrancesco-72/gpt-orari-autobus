@@ -2,7 +2,8 @@ import streamlit as st
 
 st.set_page_config(page_title="Orari Autobus GPT", page_icon="🚍")
 
-st.title("\ud83d\ude8d Orari Autobus - Mini GPT")
+st.title("Orari Autobus - Mini GPT")
+
 
 # Dati degli orari incorporati direttamente nel codice
 orari_data = {
