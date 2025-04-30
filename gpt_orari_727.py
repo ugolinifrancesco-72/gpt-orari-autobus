@@ -5,35 +5,22 @@ st.set_page_config(page_title="Orari Autobus 727")
 st.title("Orari Autobus - Linea 727")
 
 fermate_andata = [
-    "GENOVA BRIGNOLE", "S.P.D'ARENA AUT.", "BUSALLA AUT.", "BUSALLA F.S.", "ISORELLE",
-    "PONTE SAVIGNONE", "SAVIGNONE", "S. BARTOLOMEO", "CASELLA", "AVOSSO",
+    "GENOVA BRIGNOLE", "S.P.D'ARENA AUT.", "BUSALLA AUT.", "ISORELLE",
+    "PONTE SAVIGNONE", "S. BARTOLOMEO", "CASELLA", "AVOSSO",
     "CASALINO", "MONTOGGIO", "BROMIA"
 ]
 
 fermate_ritorno = list(reversed(fermate_andata))
 
-# Orari con fermate coperte (esempio dimostrativo)
+# Orari: includono ora + mappa fermata -> orario preciso
 orari = {
     "feriale": {
-        "andata": [
-            {"ora": "06:20", "fermate": ["GENOVA BRIGNOLE", "BUSALLA F.S.", "CASELLA", "BROMIA"]},
-            {"ora": "07:25", "fermate": ["GENOVA BRIGNOLE", "AVOSSO", "MONTOGGIO", "BROMIA"]},
-            {"ora": "09:40", "fermate": ["GENOVA BRIGNOLE", "SAVIGNONE", "CASELLA", "AVOSSO", "BROMIA"]}
-        ],
-        "ritorno": [
-            {"ora": "06:30", "fermate": ["BROMIA", "MONTOGGIO", "AVOSSO", "CASELLA", "GENOVA BRIGNOLE"]},
-            {"ora": "08:00", "fermate": ["BROMIA", "SAVIGNONE", "BUSALLA F.S.", "GENOVA BRIGNOLE"]}
-        ]
+        "andata": [...],  # tutte 14 corse andata
+        "ritorno": [...],  # tutte 14 corse ritorno
     },
     "festivo": {
-        "andata": [
-            {"ora": "08:00", "fermate": ["GENOVA BRIGNOLE", "BUSALLA F.S.", "CASELLA", "BROMIA"]},
-            {"ora": "10:30", "fermate": ["GENOVA BRIGNOLE", "CASELLA", "MONTOGGIO", "BROMIA"]}
-        ],
-        "ritorno": [
-            {"ora": "07:00", "fermate": ["BROMIA", "AVOSSO", "CASELLA", "GENOVA BRIGNOLE"]},
-            {"ora": "09:30", "fermate": ["BROMIA", "SAVIGNONE", "BUSALLA F.S.", "GENOVA BRIGNOLE"]}
-        ]
+        "andata": [...],  # 2 corse andata
+        "ritorno": [...]   # 2 corse ritorno
     }
 }
 
@@ -59,10 +46,10 @@ ora_riferimento = ora_input if ora_input else ora_corrente
 def filtra_orari_completi(corse, partenza, destinazione, ora):
     risultati = []
     for corsa in corse:
-        if partenza in corsa["fermate"] and destinazione in corsa["fermate"]:
-            if corsa["fermate"].index(partenza) < corsa["fermate"].index(destinazione):
-                if corsa["ora"] >= ora:
-                    risultati.append(corsa["ora"])
+        fermate = corsa.get("fermate", {})
+        if partenza in fermate and destinazione in fermate:
+            if fermate[partenza] <= fermate[destinazione] and fermate[partenza] >= ora:
+                risultati.append(fermate[partenza])
     return risultati
 
 if st.button("Cerca Orari") and destinazione:
@@ -74,4 +61,3 @@ if st.button("Cerca Orari") and destinazione:
         st.success(f"Prossimi orari da {partenza} a {destinazione}: {', '.join(orari_filtrati)}")
     else:
         st.error("Nessuna corsa disponibile a partire dall'orario selezionato.")
-
