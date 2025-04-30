@@ -380,5 +380,14 @@ if st.button("Cerca Orari") and destinazione:
         import pandas as pd
         df = pd.DataFrame({"Orario di partenza": orari_filtrati})
         st.dataframe(df)
+        csv = df.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="📥 Scarica orari in CSV",
+            data=csv,
+            file_name=f"orari_{partenza}_{destinazione}.csv",
+            mime='text/csv'
+        )
     else:
         st.error("Nessuna corsa disponibile a partire dall'orario selezionato.")
+
+st.caption("App realizzata da Francesco per la Linea 727 – Tutti i diritti riservati")
