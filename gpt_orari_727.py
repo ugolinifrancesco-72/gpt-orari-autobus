@@ -367,7 +367,16 @@ def filtra_orari_completi(corse, partenza, destinazione, ora):
         fermate = corsa.get("fermate", {})
         if partenza in fermate and destinazione in fermate:
             if fermate[partenza] <= fermate[destinazione] and fermate[partenza] >= ora:
-                risultati.append(fermate[partenza])
+                from datetime import datetime as dt
+
+                ora_partenza = dt.strptime(fermate[partenza], "%H:%M")
+                ora_arrivo = dt.strptime(fermate[destinazione], "%H:%M")
+                durata = int((ora_arrivo - ora_partenza).total_seconds() // 60)
+                risultati.append({
+                    "partenza": fermate[partenza],
+                    "arrivo": fermate[destinazione],
+                    "durata (minuti)": durata
+                })
     return risultati
 
 if st.button("Cerca Orari") and destinazione:
@@ -378,7 +387,7 @@ if st.button("Cerca Orari") and destinazione:
     if orari_filtrati:
         st.success(f"Prossimi orari da {partenza} a {destinazione}:")
         import pandas as pd
-        df = pd.DataFrame({"Orario di partenza": orari_filtrati})
+        df = pd.DataFrame(orari_filtrati)
         st.dataframe(df)
         csv = df.to_csv(index=False).encode('utf-8')
         st.download_button(
