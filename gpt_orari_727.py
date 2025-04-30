@@ -376,6 +376,9 @@ if st.button("Cerca Orari") and destinazione:
     orari_filtrati = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
 
     if orari_filtrati:
-        st.success(f"Prossimi orari da {partenza} a {destinazione}: {', '.join(orari_filtrati)}")
+        st.success(f"Prossimi orari da {partenza} a {destinazione}:")
+        import pandas as pd
+        df = pd.DataFrame({"Orario di partenza": orari_filtrati})
+        st.dataframe(df)
     else:
         st.error("Nessuna corsa disponibile a partire dall'orario selezionato.")
