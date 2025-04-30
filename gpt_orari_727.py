@@ -174,7 +174,7 @@ orari = {
     }
 }
         # ⬇⬇⬇ INCOLLA QUI GLI ORARI COMPLETI FESTIVI RITORNO (Bromia ➜ Brignole) ⬇⬇⬇
-    }
+    
 }
 
 st.markdown("### Seleziona il viaggio")
