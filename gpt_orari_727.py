@@ -208,115 +208,164 @@ orari = {
   }
         ],
         "ritorno": [
-            {
-  "ora": "06:15",
-  "fermate": {
-    "BROMIA": "06:15",
-    "MONTOGGIO": "06:20",
-    "CASALINO": "06:23",
-    "AVOSSO": "06:25",
-    "CASELLA": "06:30",
-    "S. BARTOLOMEO": "06:32",
-    "PONTE SAVIGNONE": "06:35",
-    "ISORELLE": "06:38",
-    "BUSALLA AUT.": "06:40",
-    "S.P.D'ARENA AUT.": "07:05",
-    "GENOVA BRIGNOLE": "07:25"
-  }
-},
-{
-  "ora": "06:30",
-  "fermate": {
-    "CASELLA": "06:30",
-    "S. BARTOLOMEO": "06:32",
-    "PONTE SAVIGNONE": "06:35",
-    "ISORELLE": "06:38",
-    "BUSALLA AUT.": "06:40",
-    "S.P.D'ARENA AUT.": "07:05",
-    "GENOVA BRIGNOLE": "07:25"
-  }
-},
-{
-  "ora": "06:30",
-  "fermate": {
-    "BROMIA": "06:30",
-    "MONTOGGIO": "06:35",
-    "CASALINO": "06:38",
-    "AVOSSO": "06:40",
-    "CASELLA": "06:45",
-    "S. BARTOLOMEO": "06:47",
-    "PONTE SAVIGNONE": "06:50",
-    "ISORELLE": "06:53",
-    "BUSALLA AUT.": "06:55",
-    "S.P.D'ARENA AUT.": "07:20",
-    "GENOVA BRIGNOLE": "07:40"
-  }
-},
-{
-  "ora": "15:00",
-  "fermate": {
-    "BROMIA": "15:00",
-    "MONTOGGIO": "15:05",
-    "CASALINO": "15:08",
-    "AVOSSO": "15:10",
-    "CASELLA": "15:15",
-    "S. BARTOLOMEO": "15:17",
-    "PONTE SAVIGNONE": "15:20",
-    "ISORELLE": "15:23",
-    "BUSALLA AUT.": "15:25",
-    "S.P.D'ARENA AUT.": "15:50",
-    "GENOVA BRIGNOLE": "16:10"
-  }
-},
-{
-  "ora": "16:00",
-  "fermate": {
-    "BROMIA": "16:00",
-    "MONTOGGIO": "16:05",
-    "CASALINO": "16:08",
-    "AVOSSO": "16:10",
-    "CASELLA": "16:15",
-    "S. BARTOLOMEO": "16:17",
-    "PONTE SAVIGNONE": "16:20",
-    "ISORELLE": "16:23",
-    "BUSALLA AUT.": "16:25",
-    "S.P.D'ARENA AUT.": "16:50",
-    "GENOVA BRIGNOLE": "17:10"
-  }
-},
-{
-  "ora": "17:00",
-  "fermate": {
-    "BROMIA": "17:00",
-    "MONTOGGIO": "17:05",
-    "CASALINO": "17:08",
-    "AVOSSO": "17:10",
-    "CASELLA": "17:15",
-    "S. BARTOLOMEO": "17:17",
-    "PONTE SAVIGNONE": "17:20",
-    "ISORELLE": "17:23",
-    "BUSALLA AUT.": "17:25",
-    "S.P.D'ARENA AUT.": "17:50",
-    "GENOVA BRIGNOLE": "18:10"
-  }
-},
-{
-  "ora": "19:00",
-  "fermate": {
-    "BROMIA": "19:00",
-    "MONTOGGIO": "19:05",
-    "CASALINO": "19:08",
-    "AVOSSO": "19:10",
-    "CASELLA": "19:15",
-    "S. BARTOLOMEO": "19:17",
-    "PONTE SAVIGNONE": "19:20",
-    "ISORELLE": "19:23",
-    "BUSALLA AUT.": "19:25",
-    "S.P.D'ARENA AUT.": "19:50",
-    "GENOVA BRIGNOLE": "20:10"
-  }
-}
-        ]
+    {
+      ,
+      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
+    },
+    {
+      ,
+      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
+    },
+    {
+      ,
+      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
+    },
+    {
+      "ora": "06:15",
+      "fermate": {
+        "BROMIA": "06:15",
+        "MONTOGGIO": "06:20",
+        "CASALINO": "06:23",
+        "AVOSSO": "06:25",
+        "CASELLA": "06:30",
+        "S. BARTOLOMEO": "06:32",
+        "PONTE SAVIGNONE": "06:35",
+        "ISORELLE": "06:38",
+        "BUSALLA AUT.": "06:40",
+        "S.P.D'ARENA AUT.": "07:05",
+        "GENOVA BRIGNOLE": "07:25"
+      }
+    },
+    {
+      "ora": "06:30",
+      "fermate": {
+        "BROMIA": "06:30",
+        "MONTOGGIO": "06:35",
+        "CASALINO": "06:38",
+        "AVOSSO": "06:40",
+        "CASELLA": "06:45",
+        "S. BARTOLOMEO": "06:47",
+        "PONTE SAVIGNONE": "06:50",
+        "ISORELLE": "06:53",
+        "BUSALLA AUT.": "06:55",
+        "S.P.D'ARENA AUT.": "07:20",
+        "GENOVA BRIGNOLE": "07:40"
+      }
+    },
+    {
+      "ora": "07:00",
+      "fermate": {
+        "BROMIA": "07:00",
+        "MONTOGGIO": "07:05",
+        "CASALINO": "07:08",
+        "AVOSSO": "07:10",
+        "CASELLA": "07:15",
+        "S. BARTOLOMEO": "07:17",
+        "PONTE SAVIGNONE": "07:20",
+        "ISORELLE": "07:23",
+        "BUSALLA AUT.": "07:25",
+        "S.P.D'ARENA AUT.": "07:50",
+        "GENOVA BRIGNOLE": "08:10"
+      }
+    },
+    {
+      "ora": "07:30",
+      "fermate": {
+        "BROMIA": "07:30",
+        "MONTOGGIO": "07:35",
+        "CASALINO": "07:38",
+        "AVOSSO": "07:40",
+        "CASELLA": "07:45",
+        "S. BARTOLOMEO": "07:47",
+        "PONTE SAVIGNONE": "07:50",
+        "ISORELLE": "07:53",
+        "BUSALLA AUT.": "07:55",
+        "S.P.D'ARENA AUT.": "08:20",
+        "GENOVA BRIGNOLE": "08:40"
+      }
+    },
+    {
+      "ora": "09:00",
+      "fermate": {
+        "BROMIA": "09:00",
+        "MONTOGGIO": "09:05",
+        "CASALINO": "09:08",
+        "AVOSSO": "09:10",
+        "CASELLA": "09:15",
+        "S. BARTOLOMEO": "09:17",
+        "PONTE SAVIGNONE": "09:20",
+        "ISORELLE": "09:23",
+        "BUSALLA AUT.": "09:35",
+        "S.P.D'ARENA AUT.": "10:00",
+        "GENOVA BRIGNOLE": "10:20"
+      }
+    },
+    
+    {
+      "ora": "15:00",
+      "fermate": {
+        "BROMIA": "15:00",
+        "MONTOGGIO": "15:05",
+        "CASALINO": "15:08",
+        "AVOSSO": "15:10",
+        "CASELLA": "15:15",
+        "S. BARTOLOMEO": "15:17",
+        "PONTE SAVIGNONE": "15:20",
+        "ISORELLE": "15:23",
+        "BUSALLA AUT.": "15:25",
+        "S.P.D'ARENA AUT.": "15:50",
+        "GENOVA BRIGNOLE": "16:10"
+      }
+    },
+    {
+      "ora": "16:00",
+      "fermate": {
+        "BROMIA": "16:00",
+        "MONTOGGIO": "16:05",
+        "CASALINO": "16:08",
+        "AVOSSO": "16:10",
+        "CASELLA": "16:15",
+        "S. BARTOLOMEO": "16:17",
+        "PONTE SAVIGNONE": "16:20",
+        "ISORELLE": "16:23",
+        "BUSALLA AUT.": "16:25",
+        "S.P.D'ARENA AUT.": "16:50",
+        "GENOVA BRIGNOLE": "17:10"
+      }
+    },
+    {
+      "ora": "17:00",
+      "fermate": {
+        "BROMIA": "17:00",
+        "MONTOGGIO": "17:05",
+        "CASALINO": "17:08",
+        "AVOSSO": "17:10",
+        "CASELLA": "17:15",
+        "S. BARTOLOMEO": "17:17",
+        "PONTE SAVIGNONE": "17:20",
+        "ISORELLE": "17:23",
+        "BUSALLA AUT.": "17:25",
+        "S.P.D'ARENA AUT.": "17:50",
+        "GENOVA BRIGNOLE": "18:10"
+      }
+    },
+    {
+      "ora": "19:00",
+      "fermate": {
+        "BROMIA": "19:00",
+        "MONTOGGIO": "19:05",
+        "CASALINO": "19:08",
+        "AVOSSO": "19:10",
+        "CASELLA": "19:15",
+        "S. BARTOLOMEO": "19:17",
+        "PONTE SAVIGNONE": "19:20",
+        "ISORELLE": "19:23",
+        "BUSALLA AUT.": "19:25",
+        "S.P.D'ARENA AUT.": "19:50",
+        "GENOVA BRIGNOLE": "20:10"
+      }
+    }
+  ]
     },
     "festivo": {
         "andata": [
@@ -420,10 +469,12 @@ def filtra_orari_completi(corse, partenza, destinazione, ora):
                 ora_partenza = dt.strptime(fermate[partenza], "%H:%M")
                 ora_arrivo = dt.strptime(fermate[destinazione], "%H:%M")
                 durata = int((ora_arrivo - ora_partenza).total_seconds() // 60)
+                note = corsa.get("note", "")
                 risultati.append({
                     "partenza": fermate[partenza],
                     "arrivo": fermate[destinazione],
-                    "durata (minuti)": durata
+                    "durata (minuti)": durata,
+                    "note": note
                 })
     return risultati
 
