@@ -275,17 +275,81 @@ orari = {
     },
     "festivo": {
         "andata": [
-            # ⬇⬇⬇ INCOLLA QUI GLI ORARI COMPLETI FESTIVI ANDATA (Brignole ➜ Bromia) ⬇⬇⬇
+            [
+  {
+    "ora": "07:35",
+    "fermate": {
+      "GENOVA BRIGNOLE": "07:35",
+      "S.P.D'ARENA AUT.": "07:55",
+      "BUSALLA AUT.": "08:20",
+      "ISORELLE": "08:22",
+      "PONTE SAVIGNONE": "08:25",
+      "S. BARTOLOMEO": "08:28",
+      "CASELLA": "08:30",
+      "AVOSSO": "08:35",
+      "CASALINO": "08:37",
+      "MONTOGGIO": "08:40",
+      "BROMIA": "08:45"
+    }
+  },
+  {
+    "ora": "18:35",
+    "fermate": {
+      "GENOVA BRIGNOLE": "18:35",
+      "S.P.D'ARENA AUT.": "18:55",
+      "BUSALLA AUT.": "19:20",
+      "ISORELLE": "19:22",
+      "PONTE SAVIGNONE": "19:25",
+      "S. BARTOLOMEO": "19:28",
+      "CASELLA": "19:30",
+      "AVOSSO": "19:35",
+      "CASALINO": "19:37",
+      "MONTOGGIO": "19:40",
+      "BROMIA": "19:45"
+    }
+  }
+]
+
         ],
         "ritorno": [
-            # ⬇⬇⬇ INCOLLA QUI GLI ORARI COMPLETI FESTIVI RITORNO (Bromia ➜ Brignole) ⬇⬇⬇
+            [
+  {
+    "ora": "09:00",
+    "fermate": {
+      "BROMIA": "09:00",
+      "MONTOGGIO": "09:05",
+      "CASALINO": "09:08",
+      "AVOSSO": "09:10",
+      "CASELLA": "09:15",
+      "S. BARTOLOMEO": "09:17",
+      "PONTE SAVIGNONE": "09:20",
+      "ISORELLE": "09:23",
+      "BUSALLA AUT.": "09:25",
+      "S.P.D'ARENA AUT.": "09:50",
+      "GENOVA BRIGNOLE": "10:10"
+    }
+  },
+  {
+    "ora": "17:00",
+    "fermate": {
+      "BROMIA": "17:00",
+      "MONTOGGIO": "17:05",
+      "CASALINO": "17:08",
+      "AVOSSO": "17:10",
+      "CASELLA": "17:15",
+      "S. BARTOLOMEO": "17:17",
+      "PONTE SAVIGNONE": "17:20",
+      "ISORELLE": "17:23",
+      "BUSALLA AUT.": "17:25",
+      "S.P.D'ARENA AUT.": "17:50",
+      "GENOVA BRIGNOLE": "18:10"
+    }
+  }
+]
+
         ]
     }
 }
-        # ⬇⬇⬇ INCOLLA QUI GLI ORARI COMPLETI FESTIVI RITORNO (Bromia ➜ Brignole) ⬇⬇⬇
-    
-}
-
 st.markdown("### Seleziona il viaggio")
 direzione = st.radio("Direzione", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"])
 direzione_key = "andata" if "Andata" in direzione else "ritorno"
