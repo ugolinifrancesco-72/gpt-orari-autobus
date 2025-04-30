@@ -161,7 +161,116 @@ orari = {
 ]
 
         "ritorno": [
-            # ⬇⬇⬇ INCOLLA QUI GLI ORARI COMPLETI FERIALI RITORNO (Bromia ➜ Brignole) ⬇⬇⬇
+           {
+  "ora": "06:15",
+  "fermate": {
+    "BROMIA": "06:15",
+    "MONTOGGIO": "06:20",
+    "CASALINO": "06:23",
+    "AVOSSO": "06:25",
+    "CASELLA": "06:30",
+    "S. BARTOLOMEO": "06:32",
+    "PONTE SAVIGNONE": "06:35",
+    "ISORELLE": "06:38",
+    "BUSALLA AUT.": "06:40",
+    "S.P.D'ARENA AUT.": "07:05",
+    "GENOVA BRIGNOLE": "07:25"
+  }
+},
+{
+  "ora": "06:30",
+  "fermate": {
+    "CASELLA": "06:30",
+    "S. BARTOLOMEO": "06:32",
+    "PONTE SAVIGNONE": "06:35",
+    "ISORELLE": "06:38",
+    "BUSALLA AUT.": "06:40",
+    "S.P.D'ARENA AUT.": "07:05",
+    "GENOVA BRIGNOLE": "07:25"
+  }
+},
+{
+  "ora": "06:30",
+  "fermate": {
+    "BROMIA": "06:30",
+    "MONTOGGIO": "06:35",
+    "CASALINO": "06:38",
+    "AVOSSO": "06:40",
+    "CASELLA": "06:45",
+    "S. BARTOLOMEO": "06:47",
+    "PONTE SAVIGNONE": "06:50",
+    "ISORELLE": "06:53",
+    "BUSALLA AUT.": "06:55",
+    "S.P.D'ARENA AUT.": "07:20",
+    "GENOVA BRIGNOLE": "07:40"
+  }
+},
+{
+  "ora": "15:00",
+  "fermate": {
+    "BROMIA": "15:00",
+    "MONTOGGIO": "15:05",
+    "CASALINO": "15:08",
+    "AVOSSO": "15:10",
+    "CASELLA": "15:15",
+    "S. BARTOLOMEO": "15:17",
+    "PONTE SAVIGNONE": "15:20",
+    "ISORELLE": "15:23",
+    "BUSALLA AUT.": "15:25",
+    "S.P.D'ARENA AUT.": "15:50",
+    "GENOVA BRIGNOLE": "16:10"
+  }
+},
+{
+  "ora": "16:00",
+  "fermate": {
+    "BROMIA": "16:00",
+    "MONTOGGIO": "16:05",
+    "CASALINO": "16:08",
+    "AVOSSO": "16:10",
+    "CASELLA": "16:15",
+    "S. BARTOLOMEO": "16:17",
+    "PONTE SAVIGNONE": "16:20",
+    "ISORELLE": "16:23",
+    "BUSALLA AUT.": "16:25",
+    "S.P.D'ARENA AUT.": "16:50",
+    "GENOVA BRIGNOLE": "17:10"
+  }
+},
+{
+  "ora": "17:00",
+  "fermate": {
+    "BROMIA": "17:00",
+    "MONTOGGIO": "17:05",
+    "CASALINO": "17:08",
+    "AVOSSO": "17:10",
+    "CASELLA": "17:15",
+    "S. BARTOLOMEO": "17:17",
+    "PONTE SAVIGNONE": "17:20",
+    "ISORELLE": "17:23",
+    "BUSALLA AUT.": "17:25",
+    "S.P.D'ARENA AUT.": "17:50",
+    "GENOVA BRIGNOLE": "18:10"
+  }
+},
+{
+  "ora": "19:00",
+  "fermate": {
+    "BROMIA": "19:00",
+    "MONTOGGIO": "19:05",
+    "CASALINO": "19:08",
+    "AVOSSO": "19:10",
+    "CASELLA": "19:15",
+    "S. BARTOLOMEO": "19:17",
+    "PONTE SAVIGNONE": "19:20",
+    "ISORELLE": "19:23",
+    "BUSALLA AUT.": "19:25",
+    "S.P.D'ARENA AUT.": "19:50",
+    "GENOVA BRIGNOLE": "20:10"
+  }
+}
+
+
         ]
     },
     "festivo": {
