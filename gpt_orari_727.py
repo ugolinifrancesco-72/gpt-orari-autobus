@@ -571,9 +571,12 @@ if partenza and destinazione:
         layers=[
             pdk.Layer(
                 "ScatterplotLayer",
-                data=tratta_df,
+                data=tratta_df.assign(color=[
+                    [0, 255, 0, 200] if f == partenza else [255, 0, 0, 200] if f == destinazione else [0, 150, 255, 180]
+                    for f in tratta_df["fermata"]
+                ]),
                 get_position='[lon, lat]',
-                get_color='[0, 150, 255, 180]',
+                get_color='color',
                 get_radius=350,
                 pickable=True,
             ),
@@ -590,6 +593,15 @@ if partenza and destinazione:
         ],
         tooltip={"text": "{fermata}"}
     ))
+
+st.markdown("""
+<div style='font-size: 14px; padding-top: 10px;'>
+  <b>Legenda:</b><br>
+  🟢 Fermata di partenza<br>
+  🔴 Fermata di arrivo<br>
+  🔵 Fermate intermedie
+</div>
+""", unsafe_allow_html=True)
 
 solo_scolastiche = st.checkbox("Mostra solo corse scolastiche")
 
