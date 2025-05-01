@@ -507,7 +507,8 @@ giorno = st.selectbox("Giorno della settimana", ["Lunedì", "Martedì", "Mercole
 ora_corrente = datetime.now().strftime("%H:%M")
 corse_totali = orari.get("feriale", {}).get("andata", []) + orari.get("feriale", {}).get("ritorno", []) + orari.get("festivo", {}).get("andata", []) + orari.get("festivo", {}).get("ritorno", [])
 all_ore = sorted(set(c["ora"] for c in corse_totali if "ora" in c))
-ora_input = st.time_input("Orario di riferimento", value=datetime.strptime(ora_corrente, "%H:%M"), format="%H:%M")
+ora_corrente_dt = datetime.strptime(ora_corrente, "%H:%M")
+ora_input = st.time_input("Orario di riferimento", value=ora_corrente_dt, format="%H:%M")
 ora_riferimento = ora_input.strftime("%H:%M")
 
 def filtra_orari_completi(corse, partenza, destinazione, ora):
