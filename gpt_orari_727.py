@@ -498,6 +498,8 @@ destinazione = st.selectbox("Fermata di arrivo", fermate_possibili) if fermate_p
 if not destinazione:
     st.warning("Non ci sono fermate successive disponibili.")
 
+solo_scolastiche = st.checkbox("Mostra solo corse scolastiche")
+
 st.markdown("### Seleziona il giorno e l'orario")
 giorno = st.selectbox("Giorno della settimana", ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"])
 ora_corrente = datetime.now().strftime("%H:%M")
@@ -527,11 +529,16 @@ def filtra_orari_completi(corse, partenza, destinazione, ora):
 if st.button("Cerca Orari") and destinazione:
     tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
     corse = orari.get(tipo, {}).get(direzione_key, [])
+    if solo_scolastiche:
+        corse = [c for c in corse if '#ES' in c.get('note', '')]
     orari_filtrati = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
 
     if orari_filtrati:
         st.success(f"Prossimi orari da {partenza} a {destinazione}:")
         import pandas as pd
+        for r in orari_filtrati:
+            if '#ES' in r.get("note", ""):
+                r["note"] = "🟡🚌 " + r["note"]
         df = pd.DataFrame(orari_filtrati)
         st.dataframe(df)
         csv = df.to_csv(index=False).encode('utf-8')
