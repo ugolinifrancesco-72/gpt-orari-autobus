@@ -208,18 +208,9 @@ orari = {
   }
         ],
         "ritorno": [
-    {
-      ,
-      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
-    },
-    {
-      ,
-      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
-    },
-    {
-      ,
-      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
-    },
+    
+    
+    
     {
       "ora": "06:15",
       "fermate": {
