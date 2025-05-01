@@ -74,7 +74,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.image("https://github.com/ugolinifrancesco-72/gpt-orari-autobus/blob/main/corriera%20atp%20freccia%20turchino-2.jpg?raw=true", use_container_width=True)
-st.title("Orari Autobus - Linea 727")
+st.markdown("<h1 style='text-align: center; color: #003366;'>🚌 Orari Autobus - Linea 727</h1>", unsafe_allow_html=True)
 
 # Mostra la mappa del percorso della Linea 727
 map_data = {
@@ -578,7 +578,7 @@ orari = {
     }
 }
 
-st.markdown("### Seleziona il viaggio")
+st.markdown("<h3 style='margin-top: 2rem;'>📍 Seleziona il viaggio</h3>", unsafe_allow_html=True)
 direzione = st.radio("Direzione", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"])
 direzione_key = "andata" if "Andata" in direzione else "ritorno"
 fermate = fermate_andata if direzione_key == "andata" else fermate_ritorno
@@ -592,7 +592,7 @@ if not destinazione:
     st.warning("Non ci sono fermate successive disponibili.")
 
 # Giorno e orario ora si definiscono prima della mappa
-st.markdown("### Seleziona il giorno e l'orario")
+st.markdown("<h3 style='margin-top: 2rem;'>🗓️ Seleziona giorno e orario</h3>", unsafe_allow_html=True)
 
 def filtra_orari_completi(corse, partenza, destinazione, ora):
     risultati = []
@@ -628,7 +628,7 @@ if partenza and destinazione:
     mostra_mappa = st.checkbox("🗺️ Mostra mappa del percorso selezionato", value=False)
 col1, col2 = st.columns([1, 1])
 with col1:
-    st.markdown(f"### 🕒 Prossima corsa da {partenza} a {destinazione}:")
+    st.markdown(f"<h4 style='color:#003366;'>🕒 Prossima corsa: <span style='color:black;'>{partenza} ➝ {destinazione}</span></h4>", unsafe_allow_html=True)
     tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
     corse = orari.get(tipo, {}).get(direzione_key, [])
     orari_disponibili = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
@@ -637,7 +637,7 @@ with col1:
     else:
         st.markdown("<i>Nessuna corsa disponibile</i>", unsafe_allow_html=True)
 with col2:
-    st.markdown(f"### 🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='color:#003366;'>🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b></h4>", unsafe_allow_html=True)
 
 if mostra_mappa:
         idx_start = list(map_data.keys()).index(partenza)
