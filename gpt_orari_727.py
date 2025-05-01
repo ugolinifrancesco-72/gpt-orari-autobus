@@ -78,7 +78,7 @@ label {
 
 st.image("https://github.com/ugolinifrancesco-72/gpt-orari-autobus/blob/main/corriera%20atp%20freccia%20turchino-2.jpg?raw=true", use_container_width=True)
 
-user_agent = st.experimental_get_query_params().get("user-agent", [""])[0].lower()
+user_agent = st.query_params.get("user-agent", [""])[0].lower()
 if "iphone" in user_agent:
     st.warning("🔧 Se alcune scritte non sono visibili, disattiva la modalità scura nelle impostazioni del tuo iPhone per una visualizzazione corretta.")
 st.markdown("<h1 style='text-align: center; color: #003366;'>🚌 Orari Autobus - Linea 727</h1>", unsafe_allow_html=True)
