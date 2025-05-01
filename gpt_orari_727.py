@@ -1,3 +1,4 @@
+
 import streamlit as st
 from datetime import datetime
 
@@ -580,8 +581,7 @@ orari = {
 
 
 st.markdown("<h3 style='margin-top: 2rem;'>📍 Seleziona la direzione di viaggio</h3>", unsafe_allow_html=True)
-st.markdown("<p style='font-size: 16px; color: black;'>📍 Direzione di viaggio</p>", unsafe_allow_html=True)
-direzione = st.radio("", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"])
+direzione = st.radio("📍 Seleziona la direzione di viaggio", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"])
 direzione_key = "andata" if "Andata" in direzione else "ritorno"
 fermate = fermate_andata if direzione_key == "andata" else fermate_ritorno
 
@@ -627,8 +627,7 @@ if destinazione:
     # Mostra la mappa del percorso selezionato
 import pydeck as pdk
 if partenza and destinazione:
-    st.markdown("<p style='font-size: 16px; color: black;'>🗺️ Mostra la mappa del percorso selezionato</p>", unsafe_allow_html=True)
-mostra_mappa = st.checkbox("🗺️ Mostra mappa del percorso selezionato", value=False)
+    mostra_mappa = st.checkbox("🗺️ Mostra mappa del percorso selezionato", value=False)
 col1, col2 = st.columns([1, 1])
 with col1:
     st.markdown(f"<h4 style='color:#003366;'>🕒 Prossima corsa: <span style='color:black;'>{partenza} ➝ {destinazione}</span></h4>", unsafe_allow_html=True)
@@ -686,7 +685,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("<p style='font-size: 16px; color: black;'>🚌 Mostra solo corse scolastiche</p>", unsafe_allow_html=True)
 solo_scolastiche = st.checkbox("🚌 Mostra solo corse scolastiche")
 
 
