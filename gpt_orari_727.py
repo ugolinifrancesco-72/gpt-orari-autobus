@@ -623,7 +623,7 @@ with col2:
     st.markdown(f"### 🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b>", unsafe_allow_html=True)
 
 if mostra_mappa:
-    idx_start = list(map_data.keys()).index(partenza)
+        idx_start = list(map_data.keys()).index(partenza)
         idx_end = list(map_data.keys()).index(destinazione)
         fermate_tratte = list(map_data.items())[idx_start:idx_end + 1] if idx_start <= idx_end else list(map_data.items())[idx_end:idx_start + 1][::-1]
         tratta_df = pd.DataFrame(fermate_tratte, columns=["fermata", "coords"])
