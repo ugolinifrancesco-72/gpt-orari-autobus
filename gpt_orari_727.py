@@ -275,7 +275,8 @@ orari = {
         "BUSALLA AUT.": "06:40",
         "S.P.D'ARENA AUT.": "07:05",
         "GENOVA BRIGNOLE": "07:25"
-      }
+      },
+      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
     },
     {
       "ora": "06:30",
