@@ -208,6 +208,45 @@ orari = {
   }
         ],
         "ritorno": [
+    {
+      "ora": "06:30",
+      "fermate": {
+        "CASELLA": "06:30",
+        "S. BARTOLOMEO": "06:32",
+        "PONTE SAVIGNONE": "06:35",
+        "ISORELLE": "06:38",
+        "BUSALLA AUT.": "06:40",
+        "S.P.D'ARENA AUT.": "07:05",
+        "GENOVA BRIGNOLE": "07:25"
+      },
+      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
+    },
+    {
+      "ora": "07:15",
+      "fermate": {
+        "CASELLA": "07:15",
+        "S. BARTOLOMEO": "07:17",
+        "PONTE SAVIGNONE": "07:20",
+        "ISORELLE": "07:23",
+        "BUSALLA AUT.": "07:25",
+        "S.P.D'ARENA AUT.": "07:50",
+        "GENOVA BRIGNOLE": "08:10"
+      },
+      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
+    },
+    {
+      "ora": "06:45",
+      "fermate": {
+        "CASELLA": "06:45",
+        "S. BARTOLOMEO": "06:47",
+        "PONTE SAVIGNONE": "06:50",
+        "ISORELLE": "06:53",
+        "BUSALLA AUT.": "06:55",
+        "S.P.D'ARENA AUT.": "07:20",
+        "GENOVA BRIGNOLE": "07:40"
+      },
+      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
+    },
     
     
     
