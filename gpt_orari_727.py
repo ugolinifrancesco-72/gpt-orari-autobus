@@ -61,35 +61,7 @@ import pydeck as pdk
 
 mappa_df = pd.DataFrame(map_data.items(), columns=["fermata", "coords"])
 mappa_df[["lat", "lon"]] = pd.DataFrame(mappa_df["coords"].tolist(), index=mappa_df.index)
-if "partenza" in locals() and "destinazione" in locals() and partenza and destinazione:
-    idx_start = list(map_data.keys()).index(partenza)
-    idx_end = list(map_data.keys()).index(destinazione)
-    fermate_tratte = list(map_data.items())[idx_start:idx_end + 1]
-    tratta_df = pd.DataFrame(fermate_tratte, columns=["fermata", "coords"])
-    tratta_df[["lat", "lon"]] = pd.DataFrame(tratta_df["coords"].tolist(), index=tratta_df.index)
-    st.pydeck_chart(pdk.Deck(
-        map_style="mapbox://styles/mapbox/light-v9",
-        initial_view_state=pdk.ViewState(latitude=44.5, longitude=9.0, zoom=9, pitch=0),
-        layers=[
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=tratta_df,
-                get_position='[lon, lat]',
-                get_color='[0, 150, 255, 180]',
-                get_radius=350,
-            ),
-            pdk.Layer(
-                "LineLayer",
-                data=tratta_df,
-                get_source_position='[lon, lat]',
-                get_target_position='[lon, lat]',
-                get_color='[0, 100, 200]',
-                get_width=4,
-                pickable=False,
-                auto_highlight=True,
-            )
-        ],
-    ))
+
 
 fermate_andata = [
     "GENOVA BRIGNOLE", "S.P.D'ARENA AUT.", "BUSALLA AUT.", "ISORELLE",
@@ -584,6 +556,38 @@ fermate_possibili = fermate[idx_partenza + 1:]
 destinazione = st.selectbox("Fermata di arrivo", fermate_possibili) if fermate_possibili else None
 if not destinazione:
     st.warning("Non ci sono fermate successive disponibili.")
+
+    # Mostra la mappa del percorso selezionato
+import pydeck as pdk
+if partenza and destinazione:
+    idx_start = list(map_data.keys()).index(partenza)
+    idx_end = list(map_data.keys()).index(destinazione)
+    fermate_tratte = list(map_data.items())[idx_start:idx_end + 1]
+    tratta_df = pd.DataFrame(fermate_tratte, columns=["fermata", "coords"])
+    tratta_df[["lat", "lon"]] = pd.DataFrame(tratta_df["coords"].tolist(), index=tratta_df.index)
+    st.pydeck_chart(pdk.Deck(
+        map_style="mapbox://styles/mapbox/light-v9",
+        initial_view_state=pdk.ViewState(latitude=44.5, longitude=9.0, zoom=9, pitch=0),
+        layers=[
+            pdk.Layer(
+                "ScatterplotLayer",
+                data=tratta_df,
+                get_position='[lon, lat]',
+                get_color='[0, 150, 255, 180]',
+                get_radius=350,
+            ),
+            pdk.Layer(
+                "LineLayer",
+                data=tratta_df,
+                get_source_position='[lon, lat]',
+                get_target_position='[lon, lat]',
+                get_color='[0, 100, 200]',
+                get_width=4,
+                pickable=False,
+                auto_highlight=True,
+            )
+        ],
+    ))
 
 solo_scolastiche = st.checkbox("Mostra solo corse scolastiche")
 
