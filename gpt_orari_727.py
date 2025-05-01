@@ -570,14 +570,12 @@ if partenza and destinazione:
         initial_view_state=pdk.ViewState(latitude=44.5, longitude=9.0, zoom=9, pitch=0),
         layers=[
             pdk.Layer(
-            "ScatterplotLayer",
-            data=tratta_df,
-            get_position='[lon, lat]',
-            get_color='[0, 150, 255, 180]',
-            get_radius=350,
-            pickable=True,
-            get_text='fermata',
-            get_tooltip='fermata',
+                "ScatterplotLayer",
+                data=tratta_df,
+                get_position='[lon, lat]',
+                get_color='[0, 150, 255, 180]',
+                get_radius=350,
+                pickable=True,
             ),
             pdk.Layer(
                 "LineLayer",
@@ -590,6 +588,7 @@ if partenza and destinazione:
                 auto_highlight=True,
             )
         ],
+        tooltip={"text": "{fermata}"}
     ))
 
 solo_scolastiche = st.checkbox("Mostra solo corse scolastiche")
