@@ -578,8 +578,8 @@ orari = {
     }
 }
 
-st.markdown("<h3 style='margin-top: 2rem;'>📍 Seleziona il viaggio</h3>", unsafe_allow_html=True)
-st.markdown("<p style='font-size: 16px; color: black;'>📍 Direzione di viaggio</p>", unsafe_allow_html=True)
+
+st.markdown("<h3 style='margin-top: 2rem;'>📍 Seleziona la direzione di viaggio</h3>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 16px; color: black;'>📍 Direzione di viaggio</p>", unsafe_allow_html=True)
 direzione = st.radio("", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"])
 direzione_key = "andata" if "Andata" in direzione else "ritorno"
