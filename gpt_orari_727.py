@@ -5,6 +5,14 @@ st.set_page_config(page_title="Orari Autobus 727", page_icon="🚌")
 
 st.markdown("""
     <style>
+:root {
+  color-scheme: light !important;
+}
+html, body, .stApp {
+  background-color: white !important;
+  color: black !important;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 @media only screen and (max-width: 768px) {
