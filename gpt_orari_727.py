@@ -560,6 +560,19 @@ if not destinazione:
     # Mostra la mappa del percorso selezionato
 import pydeck as pdk
 if partenza and destinazione:
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.markdown(f"### 🕒 Prossima corsa da {partenza} a {destinazione}:")
+        tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
+        corse = orari.get(tipo, {}).get(direzione_key, [])
+        orari_disponibili = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
+        if orari_disponibili:
+            st.markdown(f"<b>{orari_disponibili[0]['partenza']} ➝ {orari_disponibili[0]['arrivo']}</b>", unsafe_allow_html=True)
+        else:
+            st.markdown("<i>Nessuna corsa disponibile</i>", unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"### 🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b>", unsafe_allow_html=True)
+
     idx_start = list(map_data.keys()).index(partenza)
     idx_end = list(map_data.keys()).index(destinazione)
     fermate_tratte = list(map_data.items())[idx_start:idx_end + 1]
