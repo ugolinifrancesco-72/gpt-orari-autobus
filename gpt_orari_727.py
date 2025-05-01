@@ -209,6 +209,17 @@ orari = {
         ],
         "ritorno": [
     {
+      "ora": "07:50",
+      "fermate": {
+        "PONTE SAVIGNONE": "07:50",
+        "ISORELLE": "07:53",
+        "BUSALLA AUT.": "07:55",
+        "S.P.D'ARENA AUT.": "08:20",
+        "GENOVA BRIGNOLE": "08:40"
+      },
+      "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
+    },
+    {
       "ora": "06:30",
       "fermate": {
         "CASELLA": "06:30",
