@@ -3,6 +3,7 @@ from datetime import datetime
 
 st.set_page_config(page_title="Orari Autobus 727", page_icon="🚌")
 
+st.image("https://github.com/ugolinifrancesco-72/gpt-orari-autobus/blob/main/corriera%20atp%20freccia%20turchino-2.jpg?raw=true", use_column_width=True)
 st.title("Orari Autobus - Linea 727")
 
 fermate_andata = [
