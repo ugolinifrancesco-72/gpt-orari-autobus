@@ -560,6 +560,25 @@ if not destinazione:
 # Giorno e orario ora si definiscono prima della mappa
 st.markdown("### Seleziona il giorno e l'orario")
 
+def filtra_orari_completi(corse, partenza, destinazione, ora):
+    risultati = []
+    for corsa in corse:
+        fermate = corsa.get("fermate", {})
+        if partenza in fermate and destinazione in fermate:
+            if fermate[partenza] <= fermate[destinazione] and fermate[partenza] >= ora:
+                from datetime import datetime as dt
+                ora_partenza = dt.strptime(fermate[partenza], "%H:%M")
+                ora_arrivo = dt.strptime(fermate[destinazione], "%H:%M")
+                durata = int((ora_arrivo - ora_partenza).total_seconds() // 60)
+                note = corsa.get("note", "")
+                risultati.append({
+                    "partenza": fermate[partenza],
+                    "arrivo": fermate[destinazione],
+                    "durata (minuti)": durata,
+                    "note": note
+                })
+    return risultati
+
 giorno = st.selectbox("Giorno della settimana", ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"])
 ora_corrente = datetime.now().strftime("%H:%M")
 corse_totali = orari.get("feriale", {}).get("andata", []) + orari.get("feriale", {}).get("ritorno", []) + orari.get("festivo", {}).get("andata", []) + orari.get("festivo", {}).get("ritorno", [])
@@ -631,25 +650,7 @@ solo_scolastiche = st.checkbox("Mostra solo corse scolastiche")
 st.markdown("### Seleziona il giorno e l'orario")
 
 
-def filtra_orari_completi(corse, partenza, destinazione, ora):
-    risultati = []
-    for corsa in corse:
-        fermate = corsa.get("fermate", {})
-        if partenza in fermate and destinazione in fermate:
-            if fermate[partenza] <= fermate[destinazione] and fermate[partenza] >= ora:
-                from datetime import datetime as dt
 
-                ora_partenza = dt.strptime(fermate[partenza], "%H:%M")
-                ora_arrivo = dt.strptime(fermate[destinazione], "%H:%M")
-                durata = int((ora_arrivo - ora_partenza).total_seconds() // 60)
-                note = corsa.get("note", "")
-                risultati.append({
-                    "partenza": fermate[partenza],
-                    "arrivo": fermate[destinazione],
-                    "durata (minuti)": durata,
-                    "note": note
-                })
-    return risultati
 
 if st.button("Cerca Orari") and destinazione:
     tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
