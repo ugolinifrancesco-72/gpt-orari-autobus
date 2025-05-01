@@ -5,6 +5,24 @@ st.set_page_config(page_title="Orari Autobus 727", page_icon="🚌")
 
 st.markdown("""
     <style>
+@media only screen and (max-width: 768px) {
+  .stApp {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .block-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .stTextInput > div > input,
+  .stSelectbox > div[data-baseweb="select"],
+  .stTimeInput > div > input {
+    font-size: 16px !important;
+  }
+  h1, h2, h3, h4 {
+    font-size: 1.1rem !important;
+  }
+}
     body {
         background-color: #f0f4f8;
     }
