@@ -14,6 +14,10 @@ st.markdown("""
     .stTextInput > div > input, .stSelectbox > div[data-baseweb="select"] {
         background-color: white !important;
         color: black !important;
+        border: 1px solid #ccc !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 6px !important;
+        padding: 6px 10px !important;
     }
 </style>
 """, unsafe_allow_html=True)
