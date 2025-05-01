@@ -62,7 +62,8 @@ orari = {
       "CASALINO": "09:07",
       "MONTOGGIO": "09:10",
       "BROMIA": "09:15"
-    }
+    },
+    "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
   },
   {
     "ora": "09:05",
@@ -94,7 +95,8 @@ orari = {
       "CASALINO": "14:07",
       "MONTOGGIO": "14:10",
       "BROMIA": "14:15"
-    }
+    },
+    "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
   },
   {
     "ora": "13:35",
@@ -110,7 +112,8 @@ orari = {
       "CASALINO": "14:37",
       "MONTOGGIO": "14:40",
       "BROMIA": "14:45"
-    }
+    },
+    "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
   },
   {
     "ora": "14:05",
@@ -123,7 +126,8 @@ orari = {
       "S. BARTOLOMEO": "14:58",
       "CASELLA": "15:00",
       "AVOSSO": "15:05"
-    }
+    },
+    "note": "#ES: Giorni di scuola dal Lunedì al Venerdì"
   },
   {
     "ora": "14:35",
