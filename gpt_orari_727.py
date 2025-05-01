@@ -6,6 +6,15 @@ st.set_page_config(page_title="Orari Autobus 727", page_icon="🚌")
 st.markdown("""
     <style>
 @media only screen and (max-width: 768px) {
+  .block-container {
+    font-size: 16px !important;
+  }
+  h1, h2, h3 {
+    font-size: 18px !important;
+  }
+  .markdown-text-container p {
+    font-size: 16px !important;
+  }
   .stApp {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
