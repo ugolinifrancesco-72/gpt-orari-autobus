@@ -61,7 +61,7 @@ import pydeck as pdk
 
 mappa_df = pd.DataFrame(map_data.items(), columns=["fermata", "coords"])
 mappa_df[["lat", "lon"]] = pd.DataFrame(mappa_df["coords"].tolist(), index=mappa_df.index)
-if partenza and destinazione:
+if "partenza" in locals() and "destinazione" in locals() and partenza and destinazione:
     idx_start = list(map_data.keys()).index(partenza)
     idx_end = list(map_data.keys()).index(destinazione)
     fermate_tratte = list(map_data.items())[idx_start:idx_end + 1]
