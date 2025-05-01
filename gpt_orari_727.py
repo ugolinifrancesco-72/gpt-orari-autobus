@@ -60,6 +60,11 @@ html, body, .stApp {
         border-radius: 6px !important;
         padding: 6px 10px !important;
     }
+.stRadio > div label,
+.stCheckbox > div label {
+  color: black !important;
+  font-size: 16px !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
