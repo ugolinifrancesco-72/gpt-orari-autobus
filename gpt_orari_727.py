@@ -65,6 +65,9 @@ html, body, .stApp {
   color: black !important;
   font-size: 16px !important;
 }
+label {
+  color: black !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
