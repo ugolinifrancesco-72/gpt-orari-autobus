@@ -26,28 +26,7 @@ st.markdown("""
     font-size: 16px !important;
   }
   .stApp {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-  .block-container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-  .stTextInput > div > input,
-  .stSelectbox > div[data-baseweb="select"],
-  .stTimeInput > div > input {
-    font-size: 16px !important;
-  }
-  h1, h2, h3, h4 {
-    font-size: 1.1rem !important;
-  }
-}
-    body {
-    font-family: 'Open Sans', sans-serif;
-        background-color: #f0f4f8;
-    }
-    .stApp {
-        background-color: #f0f4f8;
+    background-color: white;
     }
     .stTextInput > div > input, .stSelectbox > div[data-baseweb="select"] {
         background-color: white !important;
@@ -582,7 +561,7 @@ orari = {
 }
 
 
-direzione = st.radio("📍 Seleziona la direzione di viaggio", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"])
+direzione = st.radio("📍 Seleziona la direzione di viaggio", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"], label_visibility="visible")
 direzione_key = "andata" if "Andata" in direzione else "ritorno"
 fermate = fermate_andata if direzione_key == "andata" else fermate_ritorno
 
@@ -628,7 +607,7 @@ if destinazione:
     # Mostra la mappa del percorso selezionato
 import pydeck as pdk
 if partenza and destinazione:
-    mostra_mappa = st.checkbox("🗺️ Mostra mappa del percorso selezionato", value=False)
+    mostra_mappa = st.checkbox("🗺️ Mostra mappa del percorso selezionato", value=False, label_visibility="visible")
 col1, col2 = st.columns([1, 1])
 with col1:
     st.markdown(f"<h4 style='color:#003366;'>🕒 Prossima corsa: <span style='color:black;'>{partenza} ➝ {destinazione}</span></h4>", unsafe_allow_html=True)
@@ -686,7 +665,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-solo_scolastiche = st.checkbox("🚌 Mostra solo corse scolastiche")
+solo_scolastiche = st.checkbox("🚌 Mostra solo corse scolastiche", label_visibility="visible")
 
 
 if st.session_state.get("Cerca Orari") and destinazione:
