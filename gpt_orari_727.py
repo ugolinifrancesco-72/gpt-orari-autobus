@@ -68,6 +68,11 @@ html, body, .stApp {
 label {
   color: black !important;
 }
+.stRadio label, .stCheckbox label, label {
+  color: black !important;
+  font-weight: 600;
+  font-size: 16px;
+}
 </style>
 """, unsafe_allow_html=True)
 
