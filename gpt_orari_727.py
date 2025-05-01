@@ -649,10 +649,6 @@ st.markdown("""
 
 solo_scolastiche = st.checkbox("Mostra solo corse scolastiche")
 
-st.markdown("### Seleziona il giorno e l'orario")
-
-
-
 
 if st.session_state.get("Cerca Orari") and destinazione:
     tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
