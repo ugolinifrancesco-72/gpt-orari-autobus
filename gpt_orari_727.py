@@ -1,4 +1,3 @@
-
 import streamlit as st
 from datetime import datetime
 
@@ -607,7 +606,7 @@ if partenza and destinazione:
 
     idx_start = list(map_data.keys()).index(partenza)
     idx_end = list(map_data.keys()).index(destinazione)
-    fermate_tratte = list(map_data.items())[idx_start:idx_end + 1]
+    fermate_tratte = list(map_data.items())[idx_start:idx_end + 1] if idx_start <= idx_end else list(map_data.items())[idx_end:idx_start + 1][::-1]
     tratta_df = pd.DataFrame(fermate_tratte, columns=["fermata", "coords"])
     tratta_df[["lat", "lon"]] = pd.DataFrame(tratta_df["coords"].tolist(), index=tratta_df.index)
     st.pydeck_chart(pdk.Deck(
