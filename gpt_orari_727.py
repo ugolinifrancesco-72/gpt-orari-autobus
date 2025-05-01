@@ -5,13 +5,17 @@ st.set_page_config(page_title="Orari Autobus 727", page_icon="🚌")
 
 st.markdown("""
     <style>
-        body {
-            background-color: #f0f4f8;
-        }
-        .stApp {
-            background-color: #f0f4f8;
-        }
-    </style>
+    body {
+        background-color: #f0f4f8;
+    }
+    .stApp {
+        background-color: #f0f4f8;
+    }
+    .stTextInput > div > input, .stSelectbox > div[data-baseweb="select"] {
+        background-color: white !important;
+        color: black !important;
+    }
+</style>
 """, unsafe_allow_html=True)
 
 st.image("https://github.com/ugolinifrancesco-72/gpt-orari-autobus/blob/main/corriera%20atp%20freccia%20turchino-2.jpg?raw=true", use_container_width=True)
