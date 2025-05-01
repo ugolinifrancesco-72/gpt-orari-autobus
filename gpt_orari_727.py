@@ -1,3 +1,4 @@
+
 import streamlit as st
 from datetime import datetime
 
@@ -586,6 +587,8 @@ all_ore = sorted(set(c["ora"] for c in corse_totali if "ora" in c))
 ora_input = st.text_input("Orario di riferimento (HH:MM) - opzionale", "")
 ora_riferimento = ora_input if ora_input else ora_corrente
 
+if destinazione:
+    st.button("Cerca Orari")
     # Mostra la mappa del percorso selezionato
 import pydeck as pdk
 if partenza and destinazione:
@@ -652,7 +655,7 @@ st.markdown("### Seleziona il giorno e l'orario")
 
 
 
-if st.button("Cerca Orari") and destinazione:
+if st.session_state.get("Cerca Orari") and destinazione:
     tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
     corse = orari.get(tipo, {}).get(direzione_key, [])
     if solo_scolastiche:
