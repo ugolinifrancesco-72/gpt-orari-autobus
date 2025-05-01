@@ -60,7 +60,6 @@ st.image("https://github.com/ugolinifrancesco-72/gpt-orari-autobus/blob/main/cor
 st.title("Orari Autobus - Linea 727")
 
 # Mostra la mappa del percorso della Linea 727
-st.markdown("### 🗺️ Mappa del percorso")
 map_data = {
     "GENOVA BRIGNOLE": (44.40726, 8.93403),
     "S.P.D'ARENA AUT.": (44.44220, 8.89243),
