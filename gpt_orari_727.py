@@ -557,9 +557,32 @@ destinazione = st.selectbox("Fermata di arrivo", fermate_possibili) if fermate_p
 if not destinazione:
     st.warning("Non ci sono fermate successive disponibili.")
 
+# Giorno e orario ora si definiscono prima della mappa
+st.markdown("### Seleziona il giorno e l'orario")
+
+giorno = st.selectbox("Giorno della settimana", ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"])
+ora_corrente = datetime.now().strftime("%H:%M")
+corse_totali = orari.get("feriale", {}).get("andata", []) + orari.get("feriale", {}).get("ritorno", []) + orari.get("festivo", {}).get("andata", []) + orari.get("festivo", {}).get("ritorno", [])
+all_ore = sorted(set(c["ora"] for c in corse_totali if "ora" in c))
+ora_input = st.text_input("Orario di riferimento (HH:MM) - opzionale", "")
+ora_riferimento = ora_input if ora_input else ora_corrente
+
     # Mostra la mappa del percorso selezionato
 import pydeck as pdk
 if partenza and destinazione:
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.markdown(f"### 🕒 Prossima corsa da {partenza} a {destinazione}:")
+        tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
+        corse = orari.get(tipo, {}).get(direzione_key, [])
+        orari_disponibili = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
+        if orari_disponibili:
+            st.markdown(f"<b>{orari_disponibili[0]['partenza']} ➝ {orari_disponibili[0]['arrivo']}</b>", unsafe_allow_html=True)
+        else:
+            st.markdown("<i>Nessuna corsa disponibile</i>", unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"### 🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b>", unsafe_allow_html=True)
+
     idx_start = list(map_data.keys()).index(partenza)
     idx_end = list(map_data.keys()).index(destinazione)
     fermate_tratte = list(map_data.items())[idx_start:idx_end + 1]
@@ -606,12 +629,7 @@ st.markdown("""
 solo_scolastiche = st.checkbox("Mostra solo corse scolastiche")
 
 st.markdown("### Seleziona il giorno e l'orario")
-giorno = st.selectbox("Giorno della settimana", ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"])
-ora_corrente = datetime.now().strftime("%H:%M")
-corse_totali = orari.get("feriale", {}).get("andata", []) + orari.get("feriale", {}).get("ritorno", []) + orari.get("festivo", {}).get("andata", []) + orari.get("festivo", {}).get("ritorno", [])
-all_ore = sorted(set(c["ora"] for c in corse_totali if "ora" in c))
-ora_input = st.text_input("Orario di riferimento (HH:MM) - opzionale", "")
-ora_riferimento = ora_input if ora_input else ora_corrente
+
 
 def filtra_orari_completi(corse, partenza, destinazione, ora):
     risultati = []
