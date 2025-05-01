@@ -609,21 +609,21 @@ if destinazione:
 import pydeck as pdk
 if partenza and destinazione:
     mostra_mappa = st.checkbox("🗺️ Mostra mappa del percorso selezionato", value=False)
-if mostra_mappa:
-        col1, col2 = st.columns([1, 1])
-        with col1:
-            st.markdown(f"### 🕒 Prossima corsa da {partenza} a {destinazione}:")
-            tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
-            corse = orari.get(tipo, {}).get(direzione_key, [])
-            orari_disponibili = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
-            if orari_disponibili:
-                st.markdown(f"<b>{orari_disponibili[0]['partenza']} ➝ {orari_disponibili[0]['arrivo']}</b>", unsafe_allow_html=True)
-            else:
-                st.markdown("<i>Nessuna corsa disponibile</i>", unsafe_allow_html=True)
-        with col2:
-            st.markdown(f"### 🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b>", unsafe_allow_html=True)
+col1, col2 = st.columns([1, 1])
+with col1:
+    st.markdown(f"### 🕒 Prossima corsa da {partenza} a {destinazione}:")
+    tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
+    corse = orari.get(tipo, {}).get(direzione_key, [])
+    orari_disponibili = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
+    if orari_disponibili:
+        st.markdown(f"<b>{orari_disponibili[0]['partenza']} ➝ {orari_disponibili[0]['arrivo']}</b>", unsafe_allow_html=True)
+    else:
+        st.markdown("<i>Nessuna corsa disponibile</i>", unsafe_allow_html=True)
+with col2:
+    st.markdown(f"### 🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b>", unsafe_allow_html=True)
 
-        idx_start = list(map_data.keys()).index(partenza)
+if mostra_mappa:
+idx_start = list(map_data.keys()).index(partenza)
         idx_end = list(map_data.keys()).index(destinazione)
         fermate_tratte = list(map_data.items())[idx_start:idx_end + 1] if idx_start <= idx_end else list(map_data.items())[idx_end:idx_start + 1][::-1]
         tratta_df = pd.DataFrame(fermate_tratte, columns=["fermata", "coords"])
