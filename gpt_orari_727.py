@@ -509,7 +509,6 @@ corse_totali = orari.get("feriale", {}).get("andata", []) + orari.get("feriale",
 all_ore = sorted(set(c["ora"] for c in corse_totali if "ora" in c))
 ora_input = st.time_input("Orario di riferimento", value=datetime.strptime(ora_corrente, "%H:%M"), format="%H:%M")
 ora_riferimento = ora_input.strftime("%H:%M")
-ora_riferimento = ora_input if ora_input else ora_corrente
 
 def filtra_orari_completi(corse, partenza, destinazione, ora):
     risultati = []
