@@ -567,7 +567,7 @@ if partenza and destinazione:
     tratta_df[["lat", "lon"]] = pd.DataFrame(tratta_df["coords"].tolist(), index=tratta_df.index)
     st.pydeck_chart(pdk.Deck(
         map_style="mapbox://styles/mapbox/light-v9",
-        initial_view_state=pdk.ViewState(latitude=44.5, longitude=9.0, zoom=9, pitch=0),
+        initial_view_state=pdk.ViewState(latitude=tratta_df['lat'].mean(), longitude=tratta_df['lon'].mean(), zoom=11, pitch=0),
         layers=[
             pdk.Layer(
                 "ScatterplotLayer",
