@@ -609,52 +609,59 @@ if destinazione:
     # Mostra la mappa del percorso selezionato
 import pydeck as pdk
 if partenza and destinazione:
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        st.markdown(f"### 🕒 Prossima corsa da {partenza} a {destinazione}:")
-        tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
-        corse = orari.get(tipo, {}).get(direzione_key, [])
-        orari_disponibili = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
-        if orari_disponibili:
-            st.markdown(f"<b>{orari_disponibili[0]['partenza']} ➝ {orari_disponibili[0]['arrivo']}</b>", unsafe_allow_html=True)
-        else:
-            st.markdown("<i>Nessuna corsa disponibile</i>", unsafe_allow_html=True)
-    with col2:
-        st.markdown(f"### 🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b>", unsafe_allow_html=True)
+    mostra_mappa = st.checkbox("🗺️ Mostra mappa del percorso selezionato", value=False)
+        chiudi_mappa = False
+        if mostra_mappa and not chiudi_mappa:
+            chiudi_mappa = st.button("❌ Chiudi mappa")
+        if chiudi_mappa:
+            mostra_mappa = False
+    if mostra_mappa:
+        col1, col2 = st.columns([1, 1])
+        with col1:
+            st.markdown(f"### 🕒 Prossima corsa da {partenza} a {destinazione}:")
+            tipo = "feriale" if giorno in ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"] else "festivo"
+            corse = orari.get(tipo, {}).get(direzione_key, [])
+            orari_disponibili = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
+            if orari_disponibili:
+                st.markdown(f"<b>{orari_disponibili[0]['partenza']} ➝ {orari_disponibili[0]['arrivo']}</b>", unsafe_allow_html=True)
+            else:
+                st.markdown("<i>Nessuna corsa disponibile</i>", unsafe_allow_html=True)
+        with col2:
+            st.markdown(f"### 🚏 Tratta selezionata:<br><b>{partenza} ➝ {destinazione}</b>", unsafe_allow_html=True)
 
-    idx_start = list(map_data.keys()).index(partenza)
-    idx_end = list(map_data.keys()).index(destinazione)
-    fermate_tratte = list(map_data.items())[idx_start:idx_end + 1] if idx_start <= idx_end else list(map_data.items())[idx_end:idx_start + 1][::-1]
-    tratta_df = pd.DataFrame(fermate_tratte, columns=["fermata", "coords"])
-    tratta_df[["lat", "lon"]] = pd.DataFrame(tratta_df["coords"].tolist(), index=tratta_df.index)
-    st.pydeck_chart(pdk.Deck(
-        map_style="mapbox://styles/mapbox/light-v9",
-        initial_view_state=pdk.ViewState(latitude=tratta_df['lat'].mean(), longitude=tratta_df['lon'].mean(), zoom=11, pitch=0),
-        layers=[
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=tratta_df.assign(color=[
-                    [0, 255, 0, 200] if f == partenza else [255, 0, 0, 200] if f == destinazione else [0, 150, 255, 180]
-                    for f in tratta_df["fermata"]
-                ]),
-                get_position='[lon, lat]',
-                get_color='color',
-                get_radius=350,
-                pickable=True,
-            ),
-            pdk.Layer(
-                "LineLayer",
-                data=tratta_df,
-                get_source_position='[lon, lat]',
-                get_target_position='[lon, lat]',
-                get_color='[0, 100, 200]',
-                get_width=4,
-                pickable=False,
-                auto_highlight=True,
-            )
-        ],
-        tooltip={"text": "{fermata}"}
-    ))
+        idx_start = list(map_data.keys()).index(partenza)
+        idx_end = list(map_data.keys()).index(destinazione)
+        fermate_tratte = list(map_data.items())[idx_start:idx_end + 1] if idx_start <= idx_end else list(map_data.items())[idx_end:idx_start + 1][::-1]
+        tratta_df = pd.DataFrame(fermate_tratte, columns=["fermata", "coords"])
+        tratta_df[["lat", "lon"]] = pd.DataFrame(tratta_df["coords"].tolist(), index=tratta_df.index)
+        st.pydeck_chart(pdk.Deck(
+            map_style="mapbox://styles/mapbox/light-v9",
+            initial_view_state=pdk.ViewState(latitude=tratta_df['lat'].mean(), longitude=tratta_df['lon'].mean(), zoom=11, pitch=0),
+            layers=[
+                pdk.Layer(
+                    "ScatterplotLayer",
+                    data=tratta_df.assign(color=[
+                        [0, 255, 0, 200] if f == partenza else [255, 0, 0, 200] if f == destinazione else [0, 150, 255, 180]
+                        for f in tratta_df["fermata"]
+                    ]),
+                    get_position='[lon, lat]',
+                    get_color='color',
+                    get_radius=350,
+                    pickable=True,
+                ),
+                pdk.Layer(
+                    "LineLayer",
+                    data=tratta_df,
+                    get_source_position='[lon, lat]',
+                    get_target_position='[lon, lat]',
+                    get_color='[0, 100, 200]',
+                    get_width=4,
+                    pickable=False,
+                    auto_highlight=True,
+                )
+            ],
+            tooltip={"text": "{fermata}"}
+        ))
 
 st.markdown("""
 <div style='font-size: 14px; padding-top: 10px;'>
