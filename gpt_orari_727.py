@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 st.set_page_config(page_title="Orari Autobus 727", page_icon="🚌")
-st.image("/mnt/data/corriera atp freccia turchino-2.jpg", width=600)
+
 st.title("Orari Autobus - Linea 727")
 
 fermate_andata = [
