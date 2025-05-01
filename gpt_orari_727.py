@@ -1,7 +1,8 @@
 import streamlit as st
 from datetime import datetime
 
-st.set_page_config(page_title="Orari Autobus 727")
+st.set_page_config(page_title="Orari Autobus 727", page_icon="🚌")
+st.image("/mnt/data/corriera atp freccia turchino-2.jpg", width=600)
 st.title("Orari Autobus - Linea 727")
 
 fermate_andata = [
@@ -534,7 +535,7 @@ if st.button("Cerca Orari") and destinazione:
     orari_filtrati = filtra_orari_completi(corse, partenza, destinazione, ora_riferimento)
 
     if orari_filtrati:
-        st.success(f"Prossimi orari da {partenza} a {destinazione}:")
+        st.markdown(f"### 🕒 Corse disponibili da **{partenza}** a **{destinazione}**")
         import pandas as pd
         for r in orari_filtrati:
             if '#ES' in r.get("note", ""):
