@@ -609,12 +609,7 @@ if destinazione:
 import pydeck as pdk
 if partenza and destinazione:
     mostra_mappa = st.checkbox("🗺️ Mostra mappa del percorso selezionato", value=False)
-chiudi_mappa = False
 if mostra_mappa:
-    chiudi_mappa = st.button("❌ Chiudi mappa")
-    if chiudi_mappa:
-        mostra_mappa = False
-    if mostra_mappa:
         col1, col2 = st.columns([1, 1])
         with col1:
             st.markdown(f"### 🕒 Prossima corsa da {partenza} a {destinazione}:")
