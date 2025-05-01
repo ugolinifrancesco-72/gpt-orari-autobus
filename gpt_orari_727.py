@@ -2,6 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 st.set_page_config(page_title="Orari Autobus 727", page_icon="🚌")
+st.info("ℹ️ Su iPhone con modalità scura attiva, alcune scritte potrebbero non essere visibili. Si consiglia di usare il tema chiaro per una corretta visualizzazione.")
 
 st.markdown("""
     <style>
