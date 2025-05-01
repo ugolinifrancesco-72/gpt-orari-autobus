@@ -41,6 +41,50 @@ st.markdown("""
 st.image("https://github.com/ugolinifrancesco-72/gpt-orari-autobus/blob/main/corriera%20atp%20freccia%20turchino-2.jpg?raw=true", use_container_width=True)
 st.title("Orari Autobus - Linea 727")
 
+# Mostra la mappa del percorso della Linea 727
+st.markdown("### 🗺️ Mappa del percorso")
+map_data = {
+    "GENOVA BRIGNOLE": (44.40726, 8.93403),
+    "S.P.D'ARENA AUT.": (44.44220, 8.89243),
+    "BUSALLA AUT.": (44.56445, 8.94434),
+    "ISORELLE": (44.56887, 9.00671),
+    "PONTE SAVIGNONE": (44.55379, 9.01859),
+    "S. BARTOLOMEO": (44.54721, 9.03258),
+    "CASELLA": (44.53783, 9.04171),
+    "AVOSSO": (44.52694, 9.04869),
+    "CASALINO": (44.51936, 9.05742),
+    "MONTOGGIO": (44.51511, 9.06431),
+    "BROMIA": (44.50935, 9.07341)
+}
+import pandas as pd
+import pydeck as pdk
+
+mappa_df = pd.DataFrame(map_data.items(), columns=["fermata", "coords"])
+mappa_df[["lat", "lon"]] = pd.DataFrame(mappa_df["coords"].tolist(), index=mappa_df.index)
+st.pydeck_chart(pdk.Deck(
+    map_style="mapbox://styles/mapbox/light-v9",
+    initial_view_state=pdk.ViewState(latitude=44.5, longitude=9.0, zoom=9, pitch=0),
+    layers=[
+        pdk.Layer(
+            "ScatterplotLayer",
+            data=mappa_df,
+            get_position='[lon, lat]',
+            get_color='[255, 165, 0, 160]',
+            get_radius=300,
+        ),
+        pdk.Layer(
+            "LineLayer",
+            data=mappa_df,
+            get_source_position='[lon, lat]',
+            get_target_position='[lon, lat]',
+            get_color='[0, 100, 200]',
+            get_width=3,
+            pickable=False,
+            auto_highlight=True,
+        )
+    ],
+))
+
 fermate_andata = [
     "GENOVA BRIGNOLE", "S.P.D'ARENA AUT.", "BUSALLA AUT.", "ISORELLE",
     "PONTE SAVIGNONE", "S. BARTOLOMEO", "CASELLA", "AVOSSO",
