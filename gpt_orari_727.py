@@ -1,4 +1,3 @@
-
 import streamlit as st
 from datetime import datetime
 
@@ -580,7 +579,6 @@ orari = {
 }
 
 
-st.markdown("<h3 style='margin-top: 2rem;'>📍 Seleziona la direzione di viaggio</h3>", unsafe_allow_html=True)
 direzione = st.radio("📍 Seleziona la direzione di viaggio", ["Andata (Brignole ➔ Bromia)", "Ritorno (Bromia ➔ Brignole)"])
 direzione_key = "andata" if "Andata" in direzione else "ritorno"
 fermate = fermate_andata if direzione_key == "andata" else fermate_ritorno
